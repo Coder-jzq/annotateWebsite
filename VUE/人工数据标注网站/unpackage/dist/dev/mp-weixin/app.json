@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/user/dataList",
+    "pages/user/dataDetail"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "数据",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

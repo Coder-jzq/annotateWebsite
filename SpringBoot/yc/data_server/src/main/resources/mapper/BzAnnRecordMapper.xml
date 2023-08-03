@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.data.mapper.BzAnnRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.data.pojo.BzAnnRecord">
+        <id column="ann_record_id" property="annRecordId" />
+        <result column="ann_record_dh" property="annRecordDh" />
+        <result column="ann_record_jz" property="annRecordJz" />
+        <result column="ann_record_user" property="annRecordUser" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ann_record_id, ann_record_dh, ann_record_jz, ann_record_user
+    </sql>
+
+</mapper>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.data.mapper.BzRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.data.pojo.BzRecord">
+        <id column="record_id" property="recordId" />
+        <result column="record_index" property="recordIndex" />
+        <result column="record_text" property="recordText" />
+        <result column="record_user1" property="recordUser1" />
+        <result column="record_user2" property="recordUser2" />
+        <result column="record_user3" property="recordUser3" />
+        <result column="record_user4" property="recordUser4" />
+        <result column="record_user5" property="recordUser5" />
+        <result column="record_user6" property="recordUser6" />
+        <result column="record_user7" property="recordUser7" />
+        <result column="record_user8" property="recordUser8" />
+        <result column="record_user9" property="recordUser9" />
+        <result column="record_user10" property="recordUser10" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        record_id, record_index, record_text, record_user1, record_user2, record_user3, record_user4, record_user5, record_user6, record_user7, record_user8 record_user9, record_user10
+    </sql>
+
+    <update id="updataRecord_0" parameterType="java.util.Map">
+        update bz_record
+        <set>
+            <if test='userlabel == "1"'>
+                record_user1 = 0
+            </if>
+            <if test='userlabel == "2"'>
+                record_user2 = 0
+            </if>
+            <if test='userlabel == "3"'>
+                record_user3 = 0
+            </if>
+            <if test='userlabel == "4"'>
+                record_user4 = 0
+            </if>
+            <if test='userlabel == "5"'>
+                record_user5 = 0
+            </if>
+            <if test='userlabel == "6"'>
+                record_user6 = 0
+            </if>
+            <if test='userlabel == "7"'>
+                record_user7 = 0
+            </if>
+            <if test='userlabel == "8"'>
+                record_user8 = 0
+            </if>
+            <if test='userlabel == "9"'>
+                record_user9 = 0
+            </if>
+            <if test='userlabel == "10"'>
+                record_user10 = 0
+            </if>
+        </set>
+        where record_index = #{idx}
+    </update>
+
+    <update id="updataRecord" parameterType="java.util.Map">
+        update bz_record
+        <set>
+            <if test='userlabel == "1"'>
+                record_user1 = 1
+            </if>
+            <if test='userlabel == "2"'>
+                record_user2 = 1
+            </if>
+            <if test='userlabel == "3"'>
+                record_user3 = 1
+            </if>
+            <if test='userlabel == "4"'>
+                record_user4 = 1
+            </if>
+            <if test='userlabel == "5"'>
+                record_user5 = 1
+            </if>
+            <if test='userlabel == "6"'>
+                record_user6 = 1
+            </if>
+            <if test='userlabel == "7"'>
+                record_user7 = 1
+            </if>
+            <if test='userlabel == "8"'>
+                record_user8 = 1
+            </if>
+            <if test='userlabel == "9"'>
+                record_user9 = 1
+            </if>
+            <if test='userlabel == "10"'>
+                record_user10 = 1
+            </if>
+        </set>
+        where record_index = #{idx}
+    </update>
+
+</mapper>

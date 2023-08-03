@@ -1,0 +1,1 @@
+<view class="main-iframe"><view style="text-align:center;color:#fefdf5;padding-top:35px;" class="_h1">文章列表</view><block wx:for="{{count}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view data-event-opts="{{[['tap',[['toWzDetail',[index]]]]]}}" class="box" bindtap="__e">{{"第"+index+"篇文章"}}</view></block></view>

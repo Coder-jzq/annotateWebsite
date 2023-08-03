@@ -1,0 +1,57 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},{
+			"path": "pages/user/dataDetail",
+			"style": {
+				"navigationBarTitleText": "文章详情"
+			}
+		},{
+			"path": "pages/admin/admin",
+			"style": {
+				"navigationBarTitleText": "管理员界面"
+			}
+		},{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},{
+			"path": "pages/admin/databuild/databuild",
+			"style": {
+				"navigationBarTitleText": "数据生成"
+			}
+		},{
+			"path": "pages/admin/datashow/datashow",
+			"style": {
+				"navigationBarTitleText": "数据展示"
+			}
+		},{
+			"path": "pages/admin/datashow/datasCount",
+			"style": {
+				"navigationBarTitleText": "标注人记录"
+			}
+		},{
+			"path": "pages/user/dataList",
+			"style": {
+				"navigationBarTitleText": "文章列表"
+			}
+		}
+	    
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "数据",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus":{
+			"titleNView":false,
+			"scrollIndicator":"none",
+			"bounce":"none"
+		}
+	}
+}

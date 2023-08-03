@@ -1,0 +1,170 @@
+<template>
+	<div class="controller" :style="WindowsHeight">
+		<div class="backimg flex justify-center">
+			<div class="login_controller mt-3 rounded-2">
+				<div>
+					<div style="position: absolute; ">
+						<image src="../../static/img/login/BusinessScenes.png" style="opacity: 0.5"></image>
+					</div>
+				<!-- 	<div style="background-color: #007AFF;width: 50rpx;height: 270px;border-bottom-left-radius: 35rpx;border-bottom-right-radius: 35rpx;">
+					</div>
+					<div style="background-color: #007AFF;width: 50rpx;height: 200px;border-bottom-left-radius: 35rpx;border-bottom-right-radius: 35rpx;">
+					</div> -->
+					<div style="margin-top: 130rpx;">
+						<div style="text-align: center;margin-bottom: 40px;">
+							<text style="font-weight: 500;font-size: 78rpx;">S2LAB数据标注平台</text>
+						</div>
+						<div class="flex justify-center" style="margin-left: 15px;">
+							<div class="flex align-center">
+								<div style="margin-bottom: 40rpx;box-shadow:  5px 5px 10px #fafafa, -5px -5px 10px #ffffff;" class="flex align-center border-grey rounded-3 pd_l_4">
+									<image style="max-width: 60rpx;max-height: 60rpx;margin-right: 10rpx;" src="../../static/img/login/icon/username.png"></image>
+									<input class="input" type="text" v-model="username" placeholder="请输入正确的账号"/>
+								</div>
+								<div v-if="username.length != 0" style="margin-bottom: 35rpx;padding-left: 15rpx;">
+									<image v-if="username.length >= 6 && username.length <= 18" style="height: 50rpx;width: 50rpx;" src="../../static/img/login/icon/y.png"></image>
+									<image v-else style="height: 38rpx;width: 38rpx;" src="../../static/img/login/icon/x.png"></image>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="flex justify-center" style="margin-left: 15px; ">
+							<div class="flex align-center">
+								<div style="box-shadow:  5px 5px 10px #fafafa, -5px -5px 10px #ffffff;" class="flex align-center border-grey rounded-3 pd_l_4">
+									<image style="max-width: 60rpx;max-height: 60rpx;margin-right: 10rpx;" src="../../static/img/login/icon/password.png"></image>
+									<input class="input" type="text" password='true' v-model="Password" placeholder="请输入正确的密码"/>
+								</div>
+								<div v-if="Password.length != 0" style="padding-left: 15rpx;">
+									<image v-if="Password.length >= 3 && Password.length <= 18" style="height: 50rpx;width: 50rpx;" src="../../static/img/login/icon/y.png"></image>
+									<image v-else style="height: 38rpx;width: 38rpx;" src="../../static/img/login/icon/x.png"></image>
+								</div>
+							</div>
+						</div>
+						
+						<div class="flex justify-center" style="margin-top: 35rpx;">
+							<button class="rounded-3" 
+								style="border-radius: 36px;background: #5d8eea;
+								box-shadow:  5px 5px 16px #314b7c,-5px -5px 16px #89d1ff;
+								color: #FFFFFF;margin-top: 50rpx;width: 230px;height: 50px;
+								text-align: center;line-height: 50px;font-size: 38rpx;" @click="login()">登录</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				username:'',
+				Password:'',
+			}
+		},
+		onLoad() {
+			
+		},
+		computed:{
+			WindowsHeight(){
+				let height
+				let width
+				uni.getSystemInfo({
+					success:function(res){
+						height = res.windowHeight
+					}
+				});
+				return `height:${height}px`
+			}
+		},
+		methods:{
+			login(){
+				new Promise((resolve, reject)=>{
+					uni.request({
+						method: 'POST',
+						url: this.$store.state.url + '/user/login/',
+						data: {
+							username: this.username,
+							password: this.Password
+						},
+						success: (res) => {
+							// 判断某个字段是否存在
+							// console.log(res)
+							if(res.data.code == 200) {
+								// 登录成功
+								uni.showToast({
+									title:'登录成功！'
+								})
+								
+								// 状态存缓存，确定是用户还是管理
+								uni.setStorageSync('status', res.data.result.status)
+								// 用户label存缓存，方便后期入库
+								uni.setStorageSync('user_label', res.data.result.userLabel)
+								// 存一下用户名，区别标注
+								uni.setStorageSync("username", res.data.result.username)
+								// console.log(res.data.result)
+								// 根据身份跳转
+								if(res.data.result.status == "user") {
+									// 跳转用户页
+									// 区别标注区间
+									uni.setStorageSync("differ", res.data.result.differ)
+									uni.redirectTo({
+										url: '../user/dataList'
+									})
+								}else if(res.data.result.status == "admin"){
+									// 跳转管理员
+									uni.redirectTo({
+										url: '../admin/admin'
+									})
+								}
+								
+							}else if(res.data.code == 500) {
+								// 登录失败
+								uni.showToast({
+									title:'密码错误！'
+								})
+							}
+						}
+					})
+				}).then((data)=>{
+					// 执行接口请求成功
+					console.log("成功")
+				},(err)=>{
+					console.log(err)
+					this.$message({
+					      message: err.msg,
+					      type: 'error'
+					 });
+				})
+				
+			}
+		}		
+	}
+</script>
+
+<style lang="scss">
+	.controller{
+		.backimg{
+			width: 100%;
+			height: 100%;
+			background-image: url(../../static/img/login/cool-background.png);
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			.login_controller{
+				height: 60%;
+				width: 60%;
+				background-color: #FFFFFF;
+				.input{
+					width: 100%;
+					height: 100rpx;
+					color: rgba(0,0,0,0.5);
+					padding-left: 10rpx;
+					padding-right: 10rpx;
+					font-size: 35rpx;
+				}
+			}
+		}
+	}
+
+</style>
